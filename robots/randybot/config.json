@@ -1,0 +1,9 @@
+{
+  "nom": "RandyBot",
+  "vitesse": 25,
+  "sante": 75,
+  "munitions" : {
+    "vitesse": 25,
+    "puissance": 25
+  }
+}

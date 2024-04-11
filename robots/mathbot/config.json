@@ -1,0 +1,9 @@
+{
+  "nom": "MathBot",
+  "vitesse": 10,
+  "sante": 90,
+  "munitions" : {
+    "vitesse": 20,
+    "puissance": 30
+  }
+}

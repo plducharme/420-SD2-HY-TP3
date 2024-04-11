@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<robot nom="CampeurBot">
+    <sante>80</sante>
+    <vitesse>20</vitesse>
+    <munitions>
+        <puissance>10</puissance>
+        <vitesse>30</vitesse>
+    </munitions>
+</robot>

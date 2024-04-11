@@ -1,0 +1,11 @@
+deplacer
+rotation
+tirer
+rotation
+tirer
+deplacer
+deplacer
+mauvaise_instruction
+rotation
+tirer
+
