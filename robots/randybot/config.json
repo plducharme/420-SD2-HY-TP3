@@ -5,5 +5,10 @@
   "munitions" : {
     "vitesse": 25,
     "puissance": 25
-  }
+  },
+  "instructions": [
+    "tirer",
+    "deplacer",
+    "rotation"
+  ]
 }

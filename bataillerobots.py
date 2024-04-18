@@ -2,6 +2,7 @@ import math
 import random
 from abc import ABC, abstractmethod
 from collections import deque
+from typing import List
 
 from PySide6.QtCore import QSize, QRect, QTimer
 from PySide6.QtGui import QPainter, QPen, QColorConstants, QPixmap, QTransform
@@ -22,9 +23,9 @@ class ChampBataille(QMainWindow):
 
         controles_widget = QWidget()
         self.robot1 = QComboBox()
-        self.robot1.addItems(["RandyBot", "MathBot", "CamperBot", "SuperBot"])
+        self.robot1.addItems(["RandyBot", "MathBot", "CampeurBot", "SuperBot"])
         self.robot2 = QComboBox()
-        self.robot2.addItems(["RandyBot", "MathBot", "CamperBot", "SuperBot"])
+        self.robot2.addItems(["RandyBot", "MathBot", "CampeurBot", "SuperBot"])
 
         disposition_controles = QHBoxLayout()
         controles_widget.setLayout(disposition_controles)
@@ -40,6 +41,7 @@ class ChampBataille(QMainWindow):
         disposition.addWidget(self.canevas)
 
         self.jeu = Jeu(self)
+        self.timer = None
 
     def recommencer(self):
         pass
@@ -110,32 +112,32 @@ class Robot(SpriteJeu, ABC):
         return self._vitesse
 
     @vitesse.setter
-    def vitesse(self, value):
-        self._vitesse = value
+    def vitesse(self, vitesse):
+        self._vitesse = vitesse
 
     @property
     def projectiles(self):
         return self._projectiles
 
     @projectiles.setter
-    def projectiles(self, value):
-        self._projectiles = value
+    def projectiles(self, projectiles):
+        self._projectiles = projectiles
 
     @property
     def vitesse_projectile(self):
         return self._vitesse_projectile
 
     @vitesse_projectile.setter
-    def vitesse_projectile(self, value):
-        self._vitesse_projectile = value
+    def vitesse_projectile(self, vitesse_projectile):
+        self._vitesse_projectile = vitesse_projectile
 
     @property
     def puissance_projectile(self):
         return self._puissance_projectile
 
     @puissance_projectile.setter
-    def puissance_projectile(self, value):
-        self._puissance_projectile = value
+    def puissance_projectile(self, puissance_projectile):
+        self._puissance_projectile = puissance_projectile
 
     @property
     def instructions(self) -> deque:
@@ -190,7 +192,6 @@ class Robot(SpriteJeu, ABC):
         painter.end()
         print(f"{self.nom}: ({self.pos_x},{self.pos_y}) {self.direction}")
 
-
     def prochaine_instruction(self):
         prochaine_instruction = self._instructions.popleft()
         match prochaine_instruction:
@@ -208,6 +209,7 @@ class Robot(SpriteJeu, ABC):
     def deplacer(self):
         # TODO implémenter le déplacement du robot
 
+        # Fin TODO
         # Si le robot se déplace à l'extérieur, on le remet sur le côté
         if self.pos_x < 0:
             self.pos_x = 0
@@ -283,7 +285,7 @@ class Projectile(SpriteJeu):
         if puissance + vitesse != 50:
             raise ValueError("Projectile prohibé! La vitesse plus la puissance ne donne pas 50! La GRC est en chemin!")
         if vitesse > 30:
-            raise ValueError("Projectile prohibé! LA vitesse maximale est de 30")
+            raise ValueError("Projectile prohibé! La vitesse maximale est de 30")
         self.__puissance = puissance
         self.__vitesse = vitesse
         self.__image = QPixmap("./images/projectile.png")
@@ -294,16 +296,16 @@ class Projectile(SpriteJeu):
         return self.__vitesse
 
     @vitesse.setter
-    def vitesse(self, value):
-        self.__vitesse = value
+    def vitesse(self, vitesse):
+        self.__vitesse = vitesse
 
     @property
     def puissance(self):
         return self.__puissance
 
     @puissance.setter
-    def puissance(self, value):
-        self.__puissance = value
+    def puissance(self, puissance):
+        self.__puissance = puissance
 
     def dessiner(self, canevas: QPixmap):
         painter = QPainter(canevas)
@@ -338,6 +340,7 @@ class Jeu:
 
     def debuter(self, liste_robots):
         emplacements = Jeu.generer_emplacements_depart()
+        self.__etape_jeu = 0
         for nom_robot in liste_robots:
 
             match nom_robot:
@@ -380,22 +383,22 @@ class Jeu:
         if self.__etape_jeu % 3 == 0:
             for robot in self.__robots:
                 robot.prochaine_instruction()
-        else:
-            for robot in self.__robots:
-                for projectile in robot.projectiles:
-                    # on bouge le projectile dans la bonne direction
-                    # TODO Implémenter le déplacement du projectile
 
-                    # on vérifie si le projectile touche un robot
-                    self.verifier_collision(projectile)
-                    # si le projectile sort du champ de bataille, on le détruit
-                    if projectile.pos_x < 0 or projectile.pos_x > Jeu.LARGEUR:
-                        del projectile
-                    elif projectile.pos_y < 0 or projectile.pos_y > Jeu.HAUTEUR:
-                        del projectile
+        for robot in self.__robots:
+            for projectile in robot.projectiles:
+                # on bouge le projectile dans la bonne direction
+                # TODO Implémenter le déplacement du projectile
+
+                # Fin TODO
+                # on vérifie si le projectile touche un robot
+                self.verifier_collision(projectile)
+                # si le projectile sort du champ de bataille, on le détruit
+                if projectile.pos_x < 0 or projectile.pos_x > Jeu.LARGEUR:
+                    del projectile
+                elif projectile.pos_y < 0 or projectile.pos_y > Jeu.HAUTEUR:
+                    del projectile
 
         self.__etape_jeu += 1
-        print(f"Étape jeu: {self.__etape_jeu}")
 
     def verifier_collision(self, projectile: Projectile):
         for robot in self.__robots:
@@ -458,8 +461,21 @@ class Jeu:
             self.__partie_nulle = True
 
 
-# Code d'exécution, ne pas toucher
-app = QApplication()
-champ = ChampBataille()
-champ.show()
-app.exec()
+# Ne pas toucher à la classe PickleConfig
+class PickleConfig:
+
+    def __init__(self, nom: str, vitesse: int, sante: int, puissance_projectile: int, vitesse_projectile: int, instructions: List[str]):
+        self.__nom = nom
+        self.__vitesse = vitesse
+        self.__sante = sante
+        self.__puissance_projectile = puissance_projectile
+        self.__vitesse_projectile = vitesse_projectile
+        self.__instructions = instructions
+
+
+if __name__ == '__main__':
+    # Code d'exécution, ne pas toucher
+    app = QApplication()
+    champ = ChampBataille()
+    champ.show()
+    app.exec()
