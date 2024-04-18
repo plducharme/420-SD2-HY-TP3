@@ -196,3 +196,7 @@ Possibilité de points bonis qui peuvent ajouter jusqu'à 5%. Il est donc possib
         - où instruction est l'instruction exécutée
       - Générer seulement si self.__etape_jeu <= 30
 ```
+
+## À propos des TODO
+Pour vous aider, les TODOs ont été ajoutés pour vous permettre de consulté la liste dans PyCharm.
+Cependant, ceci va causer un message d'erreur lors d'un push. Il suffit de choisir l'option "" 

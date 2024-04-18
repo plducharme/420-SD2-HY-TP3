@@ -190,7 +190,7 @@ class Robot(SpriteJeu, ABC):
         painter.setTransform(transform)
         painter.drawPixmap(QRect(0, 0, 64, 64), self._qpixmap)
         painter.end()
-        print(f"{self.nom}: ({self.pos_x},{self.pos_y}) {self.direction}")
+        # print(f"{self.nom}: ({self.pos_x},{self.pos_y}) {self.direction}")
 
     def prochaine_instruction(self):
         prochaine_instruction = self._instructions.popleft()
@@ -233,7 +233,7 @@ class Robot(SpriteJeu, ABC):
         pos_y = int(64 * math.sin(self.direction))
         projectile = Projectile(self.pos_x + pos_x, self.pos_y + pos_y, self.direction, self.puissance_projectile,
                                 self.vitesse_projectile)
-        print(f"Projectile généré à ({self.pos_x + pos_x},{self.pos_y + pos_y}) {self.direction}")
+        # print(f"Projectile généré à ({self.pos_x + pos_x},{self.pos_y + pos_y}) {self.direction}")
         self._projectiles.append(projectile)
 
 
