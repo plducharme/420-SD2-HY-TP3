@@ -198,5 +198,14 @@ Possibilité de points bonis qui peuvent ajouter jusqu'à 5%. Il est donc possib
 ```
 
 ## À propos des TODO
-Pour vous aider, les TODOs ont été ajoutés pour vous permettre de consulté la liste dans PyCharm.
-Cependant, ceci va causer un message d'erreur lors d'un push. Il suffit de choisir l'option "" 
+Pour vous aider, les TODOs ont été ajoutés pour vous permettre de consulter la liste dans PyCharm.
+Cependant, ceci va causer un message d'avertissement lors du premier commit à partir du projet. Vous pouvez choisir l'option permettant
+de faire le commit quand même ou vous pouvez désactiver la vérification des TODOs.
+
+```
+File | Settings | Version Control | Commit sur Windows et Linux
+PyCharm | Settings | Version Control | Commit sur macOS
+
+Before Commit
+  Check TODO -> décocher
+```
