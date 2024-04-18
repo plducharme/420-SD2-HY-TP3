@@ -9,7 +9,11 @@ from PySide6.QtGui import QPainter, QPen, QColorConstants, QPixmap, QTransform
 from PySide6.QtWidgets import QApplication, QLabel, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QPushButton, \
     QComboBox
 
-
+###########################
+# nom1 (utilisateur github)
+# nom2 (utilisateur github)
+# nom3 (utilisateur github)
+##########################
 class ChampBataille(QMainWindow):
 
     def __init__(self):
