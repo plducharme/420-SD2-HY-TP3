@@ -54,7 +54,7 @@ En plus des propriétés héritées, contient les propriétés:
     - projectiles
         - list[Projectile]: liste de Projectile de ce robot existant sur le champ de bataille
 ```
-Vous n'avez rien à modifier dans cette classe.
+Vous avez une méthode à implémenter dans cette classe.
 
 ## Classe Projectile
 Classe abstraite représentant un projectile tiré par un robot.
@@ -104,7 +104,7 @@ RandyBot est chaotique. Il est imprévisible car il effectue des rotations au ha
 - À implémenter:
   - charger_configuration(self)
     - Enlever la configuration par défaut
-    - Sa configuration se trouve dans le fichier "randybot/config.json"
+    - Sa configuration se trouve dans le fichier "robots/randybot/config.json"
   - rotation(self)
     - il retourne un float ayant une valeur entre 0 et 360
 ```
@@ -114,7 +114,7 @@ MathBot se fie sur une fonction mathématique pour décider de sa rotation.
 - À implémenter:
   - charger_configuration(self)
     - Enlever la configuration par défaut
-    - La configuration de MathBot se trouve dans un fichier binaire "mathbot/config.bin"
+    - La configuration de MathBot se trouve dans un fichier binaire "robots/mathbot/config.bin"
       - La structure est comme suit:
         - 7 octets contenant le nom du robot
         - 5 octets ayant la valeur "STATS"
@@ -129,7 +129,7 @@ MathBot se fie sur une fonction mathématique pour décider de sa rotation.
             - Si une instruction contient des espaces vides à la fin, supprimer les espaces
             - Ajouter l'instruction à la liste d'instruction
   - rotation(self)
-    - Pour ce qui est de la rotation, MathBot utilise les informations météo contenues dans le fichier "mathbot/rotation.csv"
+    - Pour ce qui est de la rotation, MathBot utilise les informations météo contenues dans le fichier "robots/mathbot/rotation.csv"
       - il calcule sa direction en utilisant la formule suivante:
         `rotation_degre = (abs(Maximale)**abs(Moyenne) * abs(Minimale) + Précipitations) % 360 `
       - La première rotation est le résultat de la première ligne de données, la deuxième rotation est le résultat de la
@@ -143,7 +143,7 @@ CampeurBot est un campeur. Il ne bouge pas et préfère juste faire sa rotation 
 - À implémenter:
   - charger_configuration(self)
     - Enlever la configuration par défaut
-    - Sa configuration est dans le fichier XML "campeurbot/config.xml"
+    - Sa configuration est dans le fichier XML "robots/campeurbot/config.xml"
   - rotation(self)
     - doit retourner 15 degrés de plus que sa direction actuelle
       - La valeur doit être située entre 0 (inclus) et 360 (non-inclus)
@@ -155,7 +155,7 @@ SuperBot croit dans l'équilibre des statistiques.
 - À implémenter:
   - charger_configuration(self)
     - Enlever la configuration par défaut
-    - Sa configuration est un objet PickleConfig qui a été sérialisé en utilisant "pickle" dans le fichier "superbot/superbot.config"
+    - Sa configuration est un objet PickleConfig qui a été sérialisé en utilisant "pickle" dans le fichier "robots/superbot/superbot.config"
   - rotation(self)
     - Aux rotations impaires (1,3,5,...), il ajoute 60 degrés à sa direction actuelle
     - Aux rotations paires (2,4,6,...), il soustrait 30 degrés à sa direction actuelle
