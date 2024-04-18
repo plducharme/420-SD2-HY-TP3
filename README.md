@@ -40,7 +40,7 @@ En plus des propriétés héritées, contient les propriétés:
     - nom
         - str: Le nom du robot
     - sante
-        - str: la santé du robot, si la sante d'un robot tombe à 0, il se brise
+        - int: la santé du robot, si la sante d'un robot tombe à 0, il se brise
     - vitesse
         - int: la vitesse en pixel à laquelle le robot se déplace
     **Note: Le total de la santé et de la vitesse doit donner 100.**
