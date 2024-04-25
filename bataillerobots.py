@@ -3,6 +3,7 @@ import random
 from abc import ABC, abstractmethod
 from collections import deque
 from typing import List
+import pickle
 
 from PySide6.QtCore import QSize, QRect, QTimer
 from PySide6.QtGui import QPainter, QPen, QColorConstants, QPixmap, QTransform
@@ -476,6 +477,31 @@ class PickleConfig:
         self.__puissance_projectile = puissance_projectile
         self.__vitesse_projectile = vitesse_projectile
         self.__instructions = instructions
+
+    @property
+    def nom(self):
+        return self.__nom
+
+    @property
+    def vitesse(self):
+        return self.__vitesse
+
+    @property
+    def sante(self):
+        return self.__sante
+
+    @property
+    def puissance_projectile(self):
+        return self.__puissance_projectile
+
+    @property
+    def vitesse_projectile(self):
+        return self.__vitesse_projectile
+
+    @property
+    def instructions(self):
+        return self.__instructions
+
 
 
 if __name__ == '__main__':
