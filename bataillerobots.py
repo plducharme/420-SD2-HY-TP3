@@ -470,7 +470,8 @@ class Jeu:
 # Ne pas toucher à la classe PickleConfig
 class PickleConfig:
 
-    def __init__(self, nom: str, vitesse: int, sante: int, puissance_projectile: int, vitesse_projectile: int, instructions: List[str]):
+    def __init__(self, nom: str, vitesse: int, sante: int, puissance_projectile: int, vitesse_projectile: int,
+                 instructions: List[str]):
         self.__nom = nom
         self.__vitesse = vitesse
         self.__sante = sante
@@ -501,7 +502,6 @@ class PickleConfig:
     @property
     def instructions(self):
         return self.__instructions
-
 
 
 if __name__ == '__main__':
