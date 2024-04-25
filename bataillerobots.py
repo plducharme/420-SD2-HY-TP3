@@ -235,8 +235,8 @@ class Robot(SpriteJeu, ABC):
         pass
 
     def tirer(self):
-        pos_x = int(64 * math.cos(self.direction))
-        pos_y = int(64 * math.sin(self.direction))
+        pos_x = int(64 * math.cos(math.radians(self.direction)))
+        pos_y = int(64 * math.sin(math.radians(self.direction)))
         projectile = Projectile(self.pos_x + pos_x, self.pos_y + pos_y, self.direction, self.puissance_projectile,
                                 self.vitesse_projectile)
         # print(f"Projectile généré à ({self.pos_x + pos_x},{self.pos_y + pos_y}) {self.direction}")
