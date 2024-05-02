@@ -106,7 +106,7 @@ RandyBot est chaotique. Il est imprévisible car il effectue des rotations au ha
     - Enlever la configuration par défaut
     - Sa configuration se trouve dans le fichier "robots/randybot/config.json"
   - rotation(self)
-    - il retourne un float ayant une valeur entre 0 et 360
+    - il assigne la direction à un float ayant une valeur entre 0 et 360
 ```
 ## MathBot
 MathBot se fie sur une fonction mathématique pour décider de sa rotation.
@@ -135,7 +135,7 @@ MathBot se fie sur une fonction mathématique pour décider de sa rotation.
       - La première rotation est le résultat de la première ligne de données, la deuxième rotation est le résultat de la
         deuxième ligne et ainsi de suite.
       - Lorsqu'il n'y a plus de ligne de données, on revient à la première ligne
-      - Retourner la valeur (float)
+      - assigne la direction à la valeur (float)
 ```
 ## CampeurBot
 CampeurBot est un campeur. Il ne bouge pas et préfère juste faire sa rotation de façon méthodique et tirer
@@ -145,7 +145,7 @@ CampeurBot est un campeur. Il ne bouge pas et préfère juste faire sa rotation 
     - Enlever la configuration par défaut
     - Sa configuration est dans le fichier XML "robots/campeurbot/config.xml"
   - rotation(self)
-    - doit retourner 15 degrés de plus que sa direction actuelle
+    - assigne la direction à 15 degrés de plus que sa direction actuelle
       - La valeur doit être située entre 0 (inclus) et 360 (non-inclus)
         - ex: 365 degrés = 5 degrés
 ```
