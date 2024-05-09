@@ -449,10 +449,10 @@ class Jeu:
                 projectile.dessiner(canevas)
 
     def verifier_fin_jeu(self):
-        # Le compte de robots brisés (santé == 0)
+        # Le compte de robots brisés (santé <= 0)
         compte_brise = 0
         for robot in self.__robots:
-            if robot.sante == 0:
+            if robot.sante <= 0:
                 compte_brise += 1
         # On a un gagnant (un robot restant)
         if len(self.__robots) - compte_brise == 1:
