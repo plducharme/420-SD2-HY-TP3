@@ -29,8 +29,8 @@ class TestBatailleRobots(unittest.TestCase):
         mathbot = MathBot(10, 10, 0)
         mathbot.charger_configuration()
         self.assertEqual(mathbot.nom, "MathBot")
-        self.assertEqual(mathbot.sante, 10)
-        self.assertEqual(mathbot.vitesse, 90)
+        self.assertEqual(mathbot.sante, 90)
+        self.assertEqual(mathbot.vitesse, 10)
         self.assertEqual(mathbot.vitesse_projectile, 20)
         self.assertEqual(mathbot.puissance_projectile, 30)
         self.assertEqual(mathbot.instructions, deque(["deplacer", "rotation", "tirer", "rotation", "tirer", "deplacer",
