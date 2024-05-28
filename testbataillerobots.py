@@ -90,6 +90,7 @@ class TestBatailleRobots(unittest.TestCase):
 
     def test_deplacement_robot(self):
         randybot = RandyBot(10, 10, 0)
+        randybot.vitesse = 25
         randybot.deplacer()
         self.assertEqual(randybot.pos_x, 35)
         self.assertEqual(randybot.pos_y, 10)
