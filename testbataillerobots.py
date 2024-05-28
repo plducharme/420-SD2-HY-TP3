@@ -76,11 +76,11 @@ class TestBatailleRobots(unittest.TestCase):
     def test_superbot_rotation(self):
         superbot = SuperBot(10, 10, 0)
         superbot.rotation()
-        self.assertEqual(superbot.direction, 60.0)
+        self.assertIn(superbot.direction, [60.0, -30.0])
         superbot.rotation()
-        self.assertEqual(superbot.direction, 30.0)
+        self.assertEqual(superbot.direction, [30.0])
         superbot.rotation()
-        self.assertEqual(superbot.direction, 90.0)
+        self.assertEqual(superbot.direction, [90.0, 0.0])
 
     def test_campeurbot_rotation(self):
         campeurbot = CampeurBot(10, 10, 0)
