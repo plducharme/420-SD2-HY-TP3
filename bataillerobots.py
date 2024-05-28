@@ -468,7 +468,7 @@ class Jeu:
 
     @property
     def liste_robots(self):
-        return self.liste_robots
+        return self.__robots
 
 
 # Ne pas toucher à la classe PickleConfig
