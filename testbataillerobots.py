@@ -76,7 +76,8 @@ class TestBatailleRobots(unittest.TestCase):
     def test_superbot_rotation(self):
         superbot = SuperBot(10, 10, 0)
         superbot.rotation()
-        self.assertIn(float(superbot.direction), [60.0, -30.0])
+        # Accepte le -30 car non-spécifié dans Sprite
+        self.assertIn(float(superbot.direction), [60.0, 330.0, -30.0])
         superbot.rotation()
         self.assertIn(float(superbot.direction), [30.0])
         superbot.rotation()
