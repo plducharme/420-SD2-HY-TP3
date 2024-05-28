@@ -65,11 +65,13 @@ class TestBatailleRobots(unittest.TestCase):
         mathbot = MathBot(10, 10, 0)
         mathbot.rotation()
         premiere_rotation = TestBatailleRobots.__calcul_rotation_mathbot(6.8, -6, -18.7, 0)
-        self.assertEqual(mathbot.direction, premiere_rotation)
+        self.assertAlmostEqual(mathbot.direction, premiere_rotation, 4)
         deuxieme_rotation = TestBatailleRobots.__calcul_rotation_mathbot(12.8, 6, -0.8, 0)
-        self.assertEqual(mathbot.direction, deuxieme_rotation)
+        mathbot.rotation()
+        self.assertAlmostEqual(mathbot.direction, deuxieme_rotation, 4)
         troisieme_rotation = TestBatailleRobots.__calcul_rotation_mathbot(-3.6, -7.1, -10.5, 0.2)
-        self.assertEqual(mathbot.direction, troisieme_rotation)
+        mathbot.rotation()
+        self.assertAlmostEqual(mathbot.direction, troisieme_rotation, 4)
 
     def test_superbot_rotation(self):
         superbot = SuperBot(10, 10, 0)

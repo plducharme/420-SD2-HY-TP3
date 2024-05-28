@@ -132,7 +132,7 @@ MathBot se fie sur une fonction mathématique pour décider de sa rotation.
     - Pour ce qui est de la rotation, MathBot utilise les informations météo contenues dans le fichier "robots/mathbot/rotation.csv"
       - il calcule sa direction en utilisant la formule suivante:
         `rotation_degre = (abs(Maximale)**abs(Moyenne) * abs(Minimale) + Précipitations) % 360 `
-      - La première rotation est le résultat de la première ligne de données, la deuxième rotation est le résultat de la
+      - La première direction est le résultat de la première ligne de données, la deuxième direction est le résultat de la
         deuxième ligne et ainsi de suite.
       - Lorsqu'il n'y a plus de ligne de données, on revient à la première ligne
       - assigne la direction à la valeur (float)
