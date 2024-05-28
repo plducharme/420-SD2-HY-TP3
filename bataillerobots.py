@@ -466,6 +466,10 @@ class Jeu:
             self.__termine = True
             self.__partie_nulle = True
 
+    @property
+    def liste_robots(self):
+        return self.liste_robots
+
 
 # Ne pas toucher à la classe PickleConfig
 class PickleConfig:

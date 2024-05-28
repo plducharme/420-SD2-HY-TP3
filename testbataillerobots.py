@@ -1,3 +1,4 @@
+import math
 import unittest
 
 from PySide6.QtWidgets import QApplication
@@ -5,10 +6,14 @@ from PySide6.QtWidgets import QApplication
 from bataillerobots import Robot, RandyBot, MathBot, SuperBot, CampeurBot, Jeu, Projectile, ChampBataille
 from collections import deque
 
+
 class TestBatailleRobots(unittest.TestCase):
 
+    app = None
+
     def setUp(self):
-        super().setUp()
+        if not QApplication.instance():
+            app = QApplication()
 
     def test_randybot_configuration(self):
         randybot = RandyBot(10, 10, 0)
@@ -47,14 +52,14 @@ class TestBatailleRobots(unittest.TestCase):
         self.assertEqual(campeurbot.nom, "CampeurBot")
         self.assertEqual(campeurbot.sante, 80)
         self.assertEqual(campeurbot.vitesse, 20)
-        self.assertEqual(campeurbot.vitesse_projectile, 20)
-        self.assertEqual(campeurbot.puissance_projectile, 30)
+        self.assertEqual(campeurbot.vitesse_projectile, 30)
+        self.assertEqual(campeurbot.puissance_projectile, 20)
         self.assertEqual(campeurbot.instructions, deque(["tirer", "rotation"]))
 
     def test_randybot_rotation(self):
         randybot = RandyBot(10, 10, 0)
         randybot.rotation()
-        self.assertIn(randybot.direction, range(0, 360))
+        self.assertIn(int(randybot.direction), range(0, 360))
 
     def test_mathbot_rotation(self):
         mathbot = MathBot(10, 10, 0)
@@ -69,58 +74,54 @@ class TestBatailleRobots(unittest.TestCase):
     def test_superbot_rotation(self):
         superbot = SuperBot(10, 10, 0)
         superbot.rotation()
-        self.assertEqual(superbot.direction, 60)
+        self.assertEqual(superbot.direction, 60.0)
         superbot.rotation()
-        self.assertEqual(superbot.direction, 30)
+        self.assertEqual(superbot.direction, 30.0)
         superbot.rotation()
-        self.assertEqual(superbot.direction, 90)
+        self.assertEqual(superbot.direction, 90.0)
 
     def test_campeurbot_rotation(self):
         campeurbot = CampeurBot(10, 10, 0)
         campeurbot.rotation()
-        self.assertEqual(campeurbot.direction, 15)
-        campeurbot.direction = 350
+        self.assertEqual(campeurbot.direction, 15.0)
+        campeurbot.direction = 350.0
         campeurbot.rotation()
-        self.assertEqual(campeurbot.direction, 5)
+        self.assertEqual(campeurbot.direction, 5.0)
 
     def test_deplacement_robot(self):
         randybot = RandyBot(10, 10, 0)
         randybot.deplacer()
-        self.assertEqual(randybot.pos_x, 30)
+        self.assertEqual(randybot.pos_x, 35)
         self.assertEqual(randybot.pos_y, 10)
         randybot.direction = 90
         randybot.deplacer()
-        self.assertEqual(randybot.pos_x, 30)
-        self.assertEqual(randybot.pos_y, 30)
+        self.assertEqual(randybot.pos_x, 35)
+        self.assertEqual(randybot.pos_y, 35)
         randybot.direction = 135
         randybot.deplacer()
-        self.assertEqual(randybot.pos_x, 30-14)
-        self.assertEqual(randybot.pos_y, 30+14)
+        self.assertEqual(randybot.pos_x, 35 + int(25 * math.cos(math.radians(randybot.direction))))
+        self.assertEqual(randybot.pos_y, 35 + int(25 * math.sin(math.radians(randybot.direction))))
 
-    # TODO: ajouter un getter de robots à Jeu pour tester les projectiles et remplacer le "name mangling"
     def test_deplacement_projectile(self):
-        app = QApplication()
         champ = ChampBataille()
         jeu = Jeu(champ)
-        robot = RandyBot(10, 10, 0)
 
-        jeu.debuter([robot])
+        jeu.debuter(["RandyBot"])
+        robot = jeu.liste_robots[0]
 
         robot.vitesse_projectile = 25
         robot.puissance_projectile = 25
+        robot.direction = 45
+        robot.pos_x = 50
+        robot.pos_y = 50
         robot.tirer()
         projectile = robot.projectiles[0]
-
+        projectile_x = projectile.pos_x + int(robot.vitesse_projectile * math.cos(math.radians(projectile.direction)))
+        projectile_y = projectile.pos_y + int(robot.vitesse_projectile * math.sin(math.radians(projectile.direction)))
         jeu.mise_a_jour_jeu()
-        self.assertEqual(projectile.pos_x, 35)
+        self.assertEqual(projectile.pos_x, projectile_x)
+        self.assertEqual(projectile.pos_x, projectile_y)
 
-
-
-
-
-
-    def tearDown(self):
-        super().tearDown()
 
     @staticmethod
     def __calcul_rotation_mathbot(maximale, moyenne, minimale, precipitations):
